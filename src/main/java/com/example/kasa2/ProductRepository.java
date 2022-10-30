@@ -41,4 +41,9 @@ public class ProductRepository {
     public void deleteById(int id) {
         jdbcTemplate.update("DELETE from products WHERE id=?", id);
     }
+
+    public void updateProduct(Product prod) {
+        jdbcTemplate.update("UPDATE products SET name=?, price=? WHERE id=?",
+                prod.getName(), prod.getPrice(), prod.getId());
+    }
 }

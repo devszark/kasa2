@@ -16,7 +16,7 @@ public class ApiProductController {
     @GetMapping("/api/products/new")
     public int newProductGET(@RequestParam(value="name") String name,
                                         @RequestParam(value="price") Float price){
-        System.out.println("My message from processApiProductCreate (/api/product/new)");
+        System.out.println("My message from newProductGet (/api/product/new)");
         Product newProd = new Product(0,name,price);
         productRepository.addProduct(newProd);
         System.out.println("Nowy produkt: "+newProd);
@@ -30,6 +30,17 @@ public class ApiProductController {
             productRepository.addProduct(newProduct);
         }
         return 1;
+    }
+
+    @PutMapping("/api/products/{id}")
+    public int newProductPUT(@PathVariable("id") int id, @RequestBody Product newProduct) {
+        Product prod = productRepository.getById(id);
+        if (prod!=null) {
+            prod.setName(newProduct.getName());
+            prod.setPrice(newProduct.getPrice());
+            productRepository.updateProduct(prod);
+            return 1;
+        } else return -1;
     }
 
     @GetMapping("/api/products")
