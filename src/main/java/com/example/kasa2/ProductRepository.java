@@ -37,4 +37,8 @@ public class ProductRepository {
                 id);
         return product;
     }
+
+    public void deleteById(int id) {
+        jdbcTemplate.update("DELETE from products WHERE id=?", id);
+    }
 }

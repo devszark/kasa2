@@ -47,4 +47,12 @@ public class ApiProductController {
         return productRepository.getById(id);
     }
 
+    @DeleteMapping("/api/products/{id}")
+    public int deleteProduct(@PathVariable("id") int id){
+        Product product = productRepository.getById(id);
+        if (product!=null){
+            productRepository.deleteById(id);
+            return 1;
+        } else return -1;
+    }
 }
