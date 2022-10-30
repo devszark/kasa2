@@ -30,4 +30,11 @@ public class ProductRepository {
         }
         return sum;
     }
+
+    public Product getById(int id) {
+        Product product = jdbcTemplate.queryForObject("SELECT id, name, price from products where id=?",
+                BeanPropertyRowMapper.newInstance(Product.class),
+                id);
+        return product;
+    }
 }

@@ -42,4 +42,9 @@ public class ApiProductController {
         return productRepository.getSum();
     }
 
+    @GetMapping("/api/products/{id}")
+    public Product getProduct(@PathVariable("id") int id){
+        return productRepository.getById(id);
+    }
+
 }
