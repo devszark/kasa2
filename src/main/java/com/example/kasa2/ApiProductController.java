@@ -8,7 +8,7 @@ import java.util.List;
 @RestController
 public class ApiProductController {
     /**
-     * This controller responds to REST API requests
+     * This controller responds to REST API requests for product-s
      */
     @Autowired
     ProductRepository productRepository;
