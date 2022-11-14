@@ -17,9 +17,12 @@ public class ApiOrderController {
     @PostMapping("/api/order/new")
     public int newOrder(@RequestBody Order newOrder) {
         /**
-         * Adding a new order - just order id and comment (without products)
+         * Adding a new order - this is order id and comment and products list
          * POST request with JSON
-         *  JSON example: { "id": 5, "comment": "Order nr 007" }
+         *  JSON example: {  "comment": "Nowy order 11",
+         *                   "id": 11,
+         *                   "productList": [ 2,3 ]
+         *                }
          */
         orderRepository.addOrder(newOrder);
         return 1;
@@ -38,8 +41,14 @@ public class ApiOrderController {
 //    @PutMapping("/api/order/{id}")
 //      It will be to add list of products to the existing order id=X
 //
-//    @GetMapping("/api/order/{id}")
-//      To get list of product id-s in order id=X
+    @GetMapping("/api/order/{id}")
+    public List<Integer> getOneOrder(@PathVariable("id") int id){
+        /**
+         * To get list of product id-s in order id=X
+          */
+        Order o = orderRepository.getById(id);
+        return o.getProductList();
+    }
 //
 //    @GetMapping("/api/order/total/{id}")
 //      To get total of the order id=X

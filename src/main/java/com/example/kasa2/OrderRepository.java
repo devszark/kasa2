@@ -14,9 +14,18 @@ public class OrderRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public void addOrder(Order newOrder) {
+    public void addOrder(Order newOrder)
+    /**
+     * Add a new order
+     * it is updating 2 tables: orders and order_product
+    */
+    {
         jdbcTemplate.update("INSERT INTO orders (id,comment) VALUES (?,?)",
                 newOrder.getId(), newOrder.getComment());
+        for (Integer prodId : newOrder.getProductList()){
+            jdbcTemplate.update("INSERT INTO order_product (order_id,product_id) VALUES (?,?)",
+                    newOrder.getId(), prodId);
+        }
     }
 
     public Order getById(int id) {
